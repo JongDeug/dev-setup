@@ -101,12 +101,19 @@ alias showfiles='defaults write com.apple.finder AppleShowAllFiles -bool true &&
 # --- Keybindings --------------------------------------------
 bindkey -e
 
-# Word movement with Option/Alt + arrows (iTerm2)
-bindkey '^[[1;3C' forward-word
-bindkey '^[[1;3D' backward-word
-# Word movement with Option + b/f (Meta)
-bindkey '^[b' backward-word
-bindkey '^[f' forward-word
+# 단어 이동. 아래 bindkey 들은 그 자체로는 아무것도 못 한다 — Option 이 Meta 로
+# 나가야 하고, 그건 iTerm2 쪽 설정이다:
+#   Settings → Profiles → Keys → General → Left/Right Option key = "Esc+"
+# 기본값 "Normal" 이면 Option+f 가 ƒ, Option+b 가 ∫ 로 입력되고 이 줄들은 영영
+# 안 먹는다. Claude Code 같은 TUI 도 같은 이유로 단어 이동이 안 된다.
+#
+# Option+←/→ 는 herdr 이 탭 이동(alt+left/right)으로 먼저 먹는다. 터미널까지
+# 내려오는 건 Option+b/f 쪽이다. Option+f 를 살리려고 AeroSpace 의
+# workspace 13 을 alt-f → alt-g 로 옮겼다 (aerospace.toml).
+bindkey '^[[1;3C' forward-word    # Option+→ (herdr 밖에서만)
+bindkey '^[[1;3D' backward-word   # Option+←
+bindkey '^[b' backward-word       # Option+b
+bindkey '^[f' forward-word        # Option+f
 
 # Delete word
 bindkey '^[[3;3~' kill-word
