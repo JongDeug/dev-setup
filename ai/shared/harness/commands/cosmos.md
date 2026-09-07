@@ -48,12 +48,13 @@ git worktree add <repo>/.claude/worktrees/<slug> -b cosmos/<slug> <base>
 ```
 Workflow({
   scriptPath: "<홈 절대경로>/.claude/workflows/cosmos-loop.js",
-  args: { spec, specPath, worktree, learning, deploy }
+  args: { spec, specPath, worktree, learning }
 })
 ```
 
 - `scriptPath`는 **절대경로여야 합니다.** `~`는 확장되지 않고 cwd 뒤에 붙습니다 — `$HOME`을 편 경로를 쓰세요(예: `/Users/<you>/.claude/workflows/cosmos-loop.js`). 이름(`name: "cosmos-loop"`)으로는 잡히지 않습니다.
-- `spec`: spec **전문**(경로 아님). `specPath`: 그 경로. `worktree`: 2번에서 만든 체크아웃 경로. `learning`: 2번에서 읽은 LEARNING.md 내용(없으면 생략). `deploy`: 사용자가 push/PR까지 원한다고 밝힌 경우에만 그 지시 문장, 아니면 생략(생략 시 로컬 커밋까지만).
+- `spec`: spec **전문**(경로 아님). `specPath`: 그 경로. `worktree`: 2번에서 만든 체크아웃 경로. `learning`: 2번에서 읽은 LEARNING.md 내용(없으면 생략).
+- **cosmos 는 로컬 커밋까지만 합니다.** push·MR·노션·위키는 이 파이프라인 밖입니다 — 회사 레포라면 `task-flow` 스킬이 브랜치 컨벤션·MR 템플릿·`glab` 을 갖고 있으니 그쪽으로 넘깁니다.
 - 워크플로가 진행 중인 동안 dev/qe에 끼어들지 마세요. 같은 일을 Task로 다시 띄우지도 마세요.
 
 결과 객체의 `result`로 갈립니다:

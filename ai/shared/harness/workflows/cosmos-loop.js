@@ -9,7 +9,7 @@ export const meta = {
   ],
 }
 
-const { spec, specPath = 'spec', worktree, learning = '', deploy = '' } = args ?? {}
+const { spec, specPath = 'spec', worktree, learning = '' } = args ?? {}
 if (!spec || !worktree) throw new Error('args.spec(전문)과 args.worktree(작업 경로)가 필요하다')
 
 // 스키마는 코드가 분기·전달에 쓰는 값만 강제한다. 나머지는 에이전트 프롬프트가
@@ -58,7 +58,7 @@ if (last.qe.verdict !== 'PASS') return { result: 'loop_exhausted', attempts, wor
 
 const ops = await agent(
   `## 작업 경로\n${worktree}\n\n## QE 가 통과시킨 변경\n${last.dev ?? ''}\n` +
-  `\n${deploy || '로컬 커밋까지만 진행하고, push 나 PR 은 만들지 마세요.'}\n`,
+  `\n로컬 커밋까지만 진행하고, push 나 PR 은 만들지 마세요.\n`,
   { agentType: 'cosmos-ops', phase: 'Ops', schema: OPS },
 )
 
