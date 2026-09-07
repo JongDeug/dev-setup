@@ -5,6 +5,13 @@
 config-version = 2
 persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
 
+# macOS 쪽에서 같이 꺼야 하는 것 (레포에 담기지 않는 설정)
+#   System Settings → Keyboard → Keyboard Shortcuts → Mission Control
+#   └ "Move left/right a space" (ctrl+←/→) 체크 해제
+# AeroSpace 는 스페이스 하나 안에서 타일링하므로 이 단축키는 쓸 일이 없고,
+# 실수로 누르면 AeroSpace 가 모르는 빈 스페이스로 넘어가 창이 사라진 것처럼
+# 보인다. ctrl+화살표를 터미널에 넘길 때도 이게 켜져 있으면 앱까지 안 온다.
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
