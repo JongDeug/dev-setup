@@ -30,8 +30,12 @@ argument-hint: <spec 경로 또는 러프한 요청>
 **모든 cosmos 실행은 전용 워크트리에서 한다** — 실패해도 브랜치 하나 지우면 끝나고, 사용자는 원본 트리에서 계속 일할 수 있다. `<slug>`는 spec 파일명과 같게 쓴다.
 
 ```bash
-git worktree add <repo>/.claude/worktrees/<slug> -b cosmos/<slug> <base>
+git worktree add <repo>/.claude/worktrees/<slug> -b <branch> <base>
 ```
+
+**`<branch>`·`<base>`는 호출자가 정하면 그 값을 그대로 쓴다.** 상위 스킬(`task-flow` 등)이나 사용자가 브랜치명·분기 기준을 지정했으면 지어내지 말고 받은 값을 쓴다 — 팀 브랜치 컨벤션은 그쪽이 갖고 있고, 여기서 새로 지으면 그 커밋은 컨벤션 밖 브랜치에 실려 MR 을 못 올린다.
+
+지정이 없을 때만 기본값으로 간다: `<branch>` = `cosmos/<slug>`, `<base>` = 현재 브랜치.
 
 체크아웃 경로를 기록하고 **이후 모든 단계에 이 작업 경로를 전달한다.** dev/qe/ops가 경로를 스스로 판단하는 일은 없다.
 
