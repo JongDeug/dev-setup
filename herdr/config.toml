@@ -70,6 +70,13 @@ delivery = "system"
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "spaces"
 
+# 기본 "dots" 는 blocked/working/done 이 색으로만 갈린다. 에이전트를 여러 개 굴리면
+# 색보다 글리프가 빠르다.
+status_indicators = "symbols"
+
+# 탭바 우측 상태. zoom 은 페인을 확대해 둔 걸 잊지 않게 해주고, 나머지는 시계.
+tab_bar_right = [{ type = "zoom" }, { type = "datetime", format = "%H:%M" }]
+
 # 기본 rows 는 아이콘만이라 상태가 글자로 안 뜬다. 상태(state_text), 어느 스페이스인지
 # (workspace), 어느 탭인지(tab), 지금 무슨 작업인지(터미널 제목)까지 보여준다.
 # agent_panel_sort = "spaces" 는 그룹 헤더를 그리지 않고 space 순으로만 정렬한다.
@@ -79,6 +86,10 @@ agent_panel_sort = "spaces"
 rows = [["state_icon", "$n", "state_text"], ["terminal_title_stripped"]]
 
 [experimental]
+# 서버 재시작(herdr update 포함) 후에도 페인 스크롤백을 살려둔다. 기본값 false 는
+# 재시작 한 번에 떠 있던 에이전트 화면이 전부 날아간다.
+pane_history = true
+
 # 한글 IME 가 켜진 상태에서도 prefix 가 먹도록, prefix 모드 동안만 ASCII 자판으로 전환한다.
 switch_ascii_input_source_in_prefix = true
 

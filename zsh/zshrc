@@ -10,6 +10,7 @@ typeset -U path PATH fpath
 path=("$HOME/.local/bin" $path)
 path=("$HOME/.grok/bin" $path)
 fpath=("$HOME/.grok/completions/zsh" $fpath)
+fpath=("$HOME/.zsh/completions" $fpath)   # herdr completion zsh
 
 # --- oh-my-zsh ----------------------------------------------
 # custom/*.zsh 는 아래 source 시점에 자동 로드
