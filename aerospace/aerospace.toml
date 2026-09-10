@@ -92,6 +92,30 @@ automatically-unhide-macos-hidden-apps = false
     12 = 'built-in'
     13 = 'built-in'
 
+
+# 앱 → 워크스페이스 고정. 창이 처음 감지될 때 한 번만 실행되므로,
+# 이후 alt-shift-<번호>로 옮긴 창은 규칙이 다시 끌고 오지 않는다.
+# 위 force-assignment 와 이어져 결국 앱 → 워크스페이스 → 모니터로 고정된다.
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 7'
+
+[[on-window-detected]]
+if.app-id = 'notion.id'
+run = 'move-node-to-workspace 8'
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -202,4 +226,6 @@ automatically-unhide-macos-hidden-apps = false
     esc = ['reload-config', 'mode main']
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    b = ['balance-sizes', 'mode main']                        # 크기만 균등 복구 (r 은 트리까지 갈아엎음)
+    e = ['enable toggle', 'mode main']                        # 타일링 잠깐 끄기 — 화면공유·줌
     backspace = ['close-all-windows-but-current', 'mode main']
