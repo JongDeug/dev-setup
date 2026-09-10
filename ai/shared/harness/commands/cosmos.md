@@ -47,12 +47,14 @@ git worktree add <repo>/.claude/worktrees/<slug> -b <branch> <base>
 
 ## 3. Dev → QE → Ops (워크플로 한 번)
 
+`base` 는 워크트리를 만들 때 쓴 `<base>` 를 그대로 넘깁니다 — ops 가 스쿼시할 때 이 기준이 필요합니다.
+
 **여기서부터는 당신이 단계를 진행하지 않습니다.** 루프 횟수·PASS/FAIL 분기·QE 리포트 필터·ops 호출은 전부 `cosmos-loop` 워크플로 안의 코드입니다. 당신은 인자를 넘기고 결과를 받습니다.
 
 ```
 Workflow({
   scriptPath: "<홈 절대경로>/.claude/workflows/cosmos-loop.js",
-  args: { spec, specPath, worktree, learning }
+  args: { spec, specPath, worktree, base, learning }
 })
 ```
 
