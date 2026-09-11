@@ -47,6 +47,10 @@ remove_worktree = "prefix+shift+o"
 # 두 액션이 걸려 어느 쪽이 뜨는지 알 수 없다 — worktree 열기 쪽을 쓴다.
 open_notification_target = ""
 
+# prefix+shift+j 는 herdr 기본 swap_pane_down 이다. 비우지 않으면 한 키에 두 액션이
+# 걸린다 (prefix+o 와 같은 이유). 페인 순서 바꾸기는 h/k/l 만 남긴다.
+swap_pane_down = ""
+
 # herdr-nvim. prefix+e 는 edit_scrollback, prefix+o 는 open_worktree 그대로 둔다.
 # 페인 이동은 herdr 기본 prefix+h/j/k/l (Ctrl+Space 다음 h/j/k/l).
 [[keys.command]]

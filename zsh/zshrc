@@ -171,8 +171,9 @@ if (( $+commands[zoxide] )); then
     local with_code=0 d
     [[ $1 == -c ]] && { with_code=1; shift; }
     d=$(_pick_dir "$@") || return
-    herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --cwd "$d" || return
+    herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --direction right --cwd "$d" || return
     (( with_code )) && code "$d"
+    return 0
   }
 fi
 
