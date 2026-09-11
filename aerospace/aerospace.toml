@@ -213,6 +213,9 @@ run = 'move-node-to-workspace 8'
 
     alt-shift-m = 'fullscreen'
 
+    # 창 하나만 닫는다. Cmd+Q 는 앱 전체가 죽는다 (VSCode 창 전부).
+    alt-shift-c = 'close'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
     alt-shift-tab = 'focus-monitor --wrap-around next'
