@@ -164,16 +164,14 @@ if (( $+commands[zoxide] )); then
   c() { local d; d=$(_pick_dir "$@") && code "$d"; }   # open the pick in VS Code
   j() { local d; d=$(_pick_dir "$@") && cd "$d"; }     # cd to the pick
 
-  # herdr prefix+shift+J / +C call this from a popup. A custom command runs in
-  # its own process and cannot cd the live pane, so it splits a new one instead.
+  # herdr prefix+shift+J calls this from a popup. A custom command runs in its own
+  # process and cannot cd the live pane, so it splits a new one instead.
   # Popups get no HERDR_PANE_ID -- HERDR_ACTIVE_PANE_ID is the tiled pane.
+  # --direction is required; without it split exits with a usage error.
   _pane_at() {
-    local with_code=0 d
-    [[ $1 == -c ]] && { with_code=1; shift; }
-    d=$(_pick_dir "$@") || return
-    herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --direction right --cwd "$d" || return
-    (( with_code )) && code "$d"
-    return 0
+    local d
+    d=$(_pick_dir "$@") &&
+      herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --direction right --cwd "$d"
   }
 fi
 
