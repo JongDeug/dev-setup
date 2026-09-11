@@ -7,8 +7,8 @@ S=m1
 
 # "창이름:ssh alias"  (ssh alias 는 ~/.ssh/config 의 Host)
 HOSTS=(
-  "dev:dev"
-  "io:io"
+  "dev:m1-dev"
+  "io:m1-io"
 )
 
 # 이미 있으면 그냥 붙는다
