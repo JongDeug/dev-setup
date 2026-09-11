@@ -17,9 +17,9 @@ rename_workspace = "prefix+."
 # Split: tmux 의 | (좌우) / - (위아래)
 split_vertical = "prefix+|"
 
-# Window(=tab) 이동: Alt+←/→ (prefix 없이)
-previous_tab = ["prefix+p", "alt+left"]
-next_tab = ["prefix+n", "alt+right"]
+# Window(=tab) 이동: Alt+←/→ (prefix 없이). prefix+p/n 은 에이전트 순회로 넘겼다.
+previous_tab = "alt+left"
+next_tab = "alt+right"
 
 # prefix+1..9 는 탭, prefix+shift+1..9 는 워크스페이스.
 # 에이전트 점프는 prefix 없이 ctrl+1..9 직행 — alt 는 AeroSpace, cmd 는 iTerm 이 먹는다.
@@ -29,9 +29,10 @@ focus_agent = "ctrl+1..9"
 # 직전 페인으로 토글 (tmux 의 prefix+; ). 탭 토글(tmux prefix+l)은 herdr 에 없다.
 last_pane = "prefix+;"
 
-# 에이전트 패널을 attention queue 로 쓸 때 앞뒤로 훑기
-previous_agent = "prefix+["
-next_agent = "prefix+]"
+# 에이전트 패널을 attention queue 로 쓸 때 앞뒤로 훑기.
+# prefix+[ 는 copy_mode 기본값이라 비워 둔다 — 덮으면 스크롤백을 못 거슬러 올라간다.
+previous_agent = "prefix+p"
+next_agent = "prefix+n"
 
 # 워크스페이스 순회 (번호 점프로 안 되는 경우용)
 previous_workspace = "prefix+shift+["
@@ -53,6 +54,27 @@ key = "prefix+v"
 type = "plugin_action"
 command = "chmarax.herdr-nvim.toggle"
 description = "nvim sidebar"
+
+# fzf 로 레포를 골라 그 폴더에 새 페인을 연다 (.zshrc 의 _pane_at).
+# -c 는 VSCode 까지 같이 연다. 커스텀 커맨드는 별도 프로세스라 살아 있는 페인의
+# cwd 를 못 바꾼다 — 그래서 cd 가 아니라 split 이다.
+# shell 타입은 detached 라 TTY 가 없어 fzf 가 죽는다. popup 이어야 한다.
+# -i 는 .zshrc 를 읽으려고 (함수라 비대화형 셸엔 없다).
+[[keys.command]]
+key = "prefix+shift+c"
+type = "popup"
+command = 'exec "${SHELL:-sh}" -ic "_pane_at -c"'
+description = "pick repo -> new pane + VSCode"
+width = "70%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+shift+j"
+type = "popup"
+command = 'exec "${SHELL:-sh}" -ic _pane_at'
+description = "pick repo -> new pane"
+width = "70%"
+height = "60%"
 
 [[keys.command]]
 key = "prefix+f"

@@ -154,6 +154,26 @@ fi
 
 if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
+
+  # Pick a git repo (frecent first) with fzf. Shared by c and j.
+  _pick_dir() {
+    { zoxide query -l; fd -Htd -d5 '^\.git$' ~/Documents -x dirname } \
+      | awk '!seen[$0]++' | fzf -q "$*" -1
+  }
+
+  c() { local d; d=$(_pick_dir "$@") && code "$d"; }   # open the pick in VS Code
+  j() { local d; d=$(_pick_dir "$@") && cd "$d"; }     # cd to the pick
+
+  # herdr prefix+shift+J / +C call this from a popup. A custom command runs in
+  # its own process and cannot cd the live pane, so it splits a new one instead.
+  # Popups get no HERDR_PANE_ID -- HERDR_ACTIVE_PANE_ID is the tiled pane.
+  _pane_at() {
+    local with_code=0 d
+    [[ $1 == -c ]] && { with_code=1; shift; }
+    d=$(_pick_dir "$@") || return
+    herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --cwd "$d" || return
+    (( with_code )) && code "$d"
+  }
 fi
 
 # Syntax highlighting MUST be sourced last
